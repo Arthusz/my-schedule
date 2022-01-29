@@ -1,0 +1,35 @@
+.container {
+    background-color: #fff;
+}
+
+.innerContainer {
+    width: 80%;
+    margin: 0 auto;
+    padding: 24px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.item {
+    font-weight: bold;
+    text-transform: uppercase;
+    &Container {
+        display: flex;
+        align-items: center;
+        gap: 24px;
+    }
+}
+
+.logo {
+    p  {
+        margin: 0;
+    }
+    &Title {
+        font-size: 30px;
+        font-weight: bold;
+    }
+    &Description {
+        color: #2d2d2d;
+    }
+}
