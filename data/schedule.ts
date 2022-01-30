@@ -6,7 +6,6 @@ export const WEEKLY_SCHEDULE = [
 			{ name: "ICT", time: "2:00 - 3:30" },
 		],
 	},
-
 	{
 		title: "Tuesday",
 		schedules: [{ name: "ICT", time: "12:30 - 2:00" }],
@@ -24,7 +23,6 @@ export const WEEKLY_SCHEDULE = [
 			{ name: "Computer Science", time: "2:00 - 3:30" },
 		],
 	},
-
 	{
 		title: "Friday",
 		schedules: [{ name: "OFF", time: "" }],
