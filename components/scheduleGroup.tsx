@@ -1,22 +1,13 @@
+import type { ScheduleGroup as ScheduleGroupType } from "../models";
 import styles from "../styles/components/scheduleGroup.module.scss";
 
-type Schedule = {
-  name: string;
-  time: string;
-};
-
-type ScheduleGroupProps = {
-  title: string;
-  schedules: Array<Schedule>;
-};
-
-const ScheduleGroup = (props: ScheduleGroupProps) => {
+const ScheduleGroup = (props: ScheduleGroupType) => {
   return (
     <div>
       <h2 className={styles.title}>{props.title}</h2>
       <div className={styles.container}>
-        {props.schedules.map((schedule) => (
-          <div className={styles.item} key={schedule.name}>
+        {props.schedules.map((schedule, i) => (
+          <div className={styles.item} key={i}>
             <span>{schedule.name}</span>
             <span>{schedule.time}</span>
           </div>

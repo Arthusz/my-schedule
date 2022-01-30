@@ -10,7 +10,7 @@ const WeeklySchedule = () => {
         <ScheduleGroup
           key={i}
           title={schedule.title}
-          schedules={schedule.schedule}
+          schedules={schedule.schedules}
         />
       ))}
     </div>
