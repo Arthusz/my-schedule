@@ -1,0 +1,12 @@
+.container {
+	width: 80%;
+	margin: 16px auto;
+	display: grid;
+	grid-template-columns: 440px 1fr;
+	gap: 16px;
+}
+
+.form {
+	display: flex;
+	flex-direction: column;
+}
