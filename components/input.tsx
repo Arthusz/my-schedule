@@ -16,10 +16,8 @@ const Input = ({ name, label, type = "text" }: InputProps) => {
 		<>
 			<div className={styles.container}>
 				{label && <label htmlFor={name}>{label}</label>}
-
 				<input type={type} id={name} className={styles.input} {...field} />
-
-				{<p className={styles.error}>{meta.touched && meta.error}</p>}
+				<p className={styles.error}>{meta.touched && meta.error}</p>
 			</div>
 		</>
 	);

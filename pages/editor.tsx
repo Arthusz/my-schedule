@@ -1,14 +1,14 @@
 import { FieldArray, Form, Formik } from "formik";
 import Head from "next/head";
 import React, { useState } from "react";
+import * as Yup from "yup";
 
+import Input from "../components/input";
 import Nav from "../components/nav";
 import WeeklySchedule from "../components/weeklySchedule";
 import styles from "../styles/pages/editor.module.scss";
 
 import type { ScheduleGroup } from "../models";
-import Input from "../components/input";
-
 const EMPTY_SCHEDULE = {
 	name: "",
 	time: "",
@@ -22,6 +22,20 @@ const EMPTY_GROUP = {
 		},
 	],
 };
+
+const validationSchema = Yup.object().shape({
+	groups: Yup.array().of(
+		Yup.object().shape({
+			title: Yup.string().required("Title is required"),
+			schedules: Yup.array().of(
+				Yup.object().shape({
+					name: Yup.string().required("Required"),
+					time: Yup.string().required("Required"),
+				})
+			),
+		})
+	),
+});
 
 const Editor = () => {
 	const [scheduleGroups, setScheduleGroups] = useState<ScheduleGroup[]>([]);
@@ -45,25 +59,21 @@ const Editor = () => {
 					<h2>Editor</h2>
 					<Formik
 						initialValues={initialValues}
+						validationSchema={validationSchema}
 						onSubmit={(values) => {
+							console.log("-> ~ Editor ~ values", values);
 							setScheduleGroups(values.groups);
 						}}
 					>
 						{({ values, setFieldValue, submitForm, errors }) => (
-							<Form className={styles.form}>
+							<Form className={`${styles.mainForm} ${styles.forms}`}>
 								<FieldArray name="groups">
 									{({
 										insert: insertGroup,
 										remove: removeGroup,
 										push: pushGroup,
 									}) => (
-										<div
-											style={{
-												border: "1px solid red",
-												padding: 12,
-												margin: 12,
-											}}
-										>
+										<div>
 											{values.groups.map((foo, groupIndex) => (
 												<div key={groupIndex}>
 													<Input
@@ -78,22 +88,12 @@ const Editor = () => {
 															remove: removeSchedule,
 															push: pushSchedule,
 														}) => (
-															<div
-																style={{
-																	border: "1px solid green",
-																	padding: 12,
-																	margin: 12,
-																}}
-															>
+															<div className={styles.forms}>
 																{values.groups[groupIndex].schedules.map(
 																	(foo, scheduleIndex) => (
 																		<div
 																			key={scheduleIndex}
-																			style={{
-																				border: "1px solid blue",
-																				padding: 12,
-																				margin: 12,
-																			}}
+																			className={styles.forms}
 																		>
 																			<Input
 																				name={`groups.${groupIndex}.schedules.${scheduleIndex}.name`}

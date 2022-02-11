@@ -6,9 +6,24 @@
 	gap: 16px;
 }
 
-.form {
+.mainForm {
 	div {
 		display: flex;
 		flex-direction: column;
 	}
+	button {
+		width: 100%;
+		background-color: #63a4ff;
+		border-radius: 4px;
+		padding: 8px 0;
+		margin-top: 12px;
+		font-size: 16px;
+	}
+}
+
+.forms {
+	padding: 12px;
+	margin: 12px;
+	border: 1px solid #ccc;
+	border-radius: 6px;
 }
