@@ -61,7 +61,6 @@ const Editor = () => {
 						initialValues={initialValues}
 						validationSchema={validationSchema}
 						onSubmit={(values) => {
-							console.log("-> ~ Editor ~ values", values);
 							setScheduleGroups(values.groups);
 						}}
 					>
