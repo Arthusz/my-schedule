@@ -9,6 +9,8 @@ import WeeklySchedule from "../components/weeklySchedule";
 import styles from "../styles/pages/editor.module.scss";
 
 import type { ScheduleGroup } from "../models";
+import { useAppDispatch } from "../store/app/hooks";
+import { hideLoading, showLoading } from "../store/features/loadingSlice";
 const EMPTY_SCHEDULE = {
 	name: "",
 	time: "",
@@ -38,6 +40,7 @@ const validationSchema = Yup.object().shape({
 });
 
 const Editor = () => {
+	const dispatch = useAppDispatch();
 	const [scheduleGroups, setScheduleGroups] = useState<ScheduleGroup[]>([]);
 
 	const initialValues = {
@@ -61,7 +64,11 @@ const Editor = () => {
 						initialValues={initialValues}
 						validationSchema={validationSchema}
 						onSubmit={(values) => {
-							setScheduleGroups(values.groups);
+							dispatch(showLoading());
+							setTimeout(() => {
+								setScheduleGroups(values.groups);
+								dispatch(hideLoading());
+							}, 2000);
 						}}
 					>
 						{({ values, setFieldValue, submitForm, errors }) => (
