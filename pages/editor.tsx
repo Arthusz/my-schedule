@@ -11,6 +11,7 @@ import styles from "../styles/pages/editor.module.scss";
 import type { ScheduleGroup } from "../models";
 import { useAppDispatch } from "../store/app/hooks";
 import { hideLoading, showLoading } from "../store/features/loadingSlice";
+import { putSchedules } from "../services/schedules";
 
 const EMPTY_SCHEDULE = {
 	name: "",
@@ -64,12 +65,16 @@ const Editor = () => {
 					<Formik
 						initialValues={initialValues}
 						validationSchema={validationSchema}
-						onSubmit={(values) => {
-							dispatch(showLoading());
-							setTimeout(() => {
+						onSubmit={async (values) => {
+							try {
+								dispatch(showLoading());
+								await putSchedules(values.groups);
 								setScheduleGroups(values.groups);
+							} catch (error) {
+								console.error(error);
+							} finally {
 								dispatch(hideLoading());
-							}, 2000);
+							}
 						}}
 					>
 						{({ values, setFieldValue, submitForm, errors }) => (
