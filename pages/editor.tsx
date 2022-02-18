@@ -11,6 +11,7 @@ import styles from "../styles/pages/editor.module.scss";
 import type { ScheduleGroup } from "../models";
 import { useAppDispatch } from "../store/app/hooks";
 import { hideLoading, showLoading } from "../store/features/loadingSlice";
+
 const EMPTY_SCHEDULE = {
 	name: "",
 	time: "",
