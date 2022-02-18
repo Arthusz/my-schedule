@@ -1,21 +1,23 @@
 import format from "date-fns/format";
 import { useEffect, useState } from "react";
 
-import { WEEKLY_SCHEDULE } from "../data/schedule";
 import styles from "../styles/components/todaySchedule.module.scss";
 import ScheduleGroup from "./scheduleGroup";
 
 import type { ScheduleGroup as ScheduleGroupType } from "../models";
 
-// to get today schedule from weekly schedule
+type TodayScheduleProps = {
+	scheduleGroups: ScheduleGroupType[];
+};
 
-const TodaySchedule = () => {
+const TodaySchedule = (props: TodayScheduleProps) => {
+	const { scheduleGroups } = props;
 	const [todaySchedule, setTodaySchedule] = useState<ScheduleGroupType>();
 	// const todaySchedule = state[0]
 	// const setTodaySchedule = state[1]
 
 	useEffect(() => {
-		const todaySchedule = WEEKLY_SCHEDULE.find(
+		const todaySchedule = scheduleGroups.find(
 			// for example. Saturday
 			(schedule) => schedule.title === format(new Date(), "EEEE")
 		);
